@@ -1,20 +1,8 @@
-// app/doctors/page.jsx
+// app/doctors/page.tsx
 "use client";
-import Link from "next/link"; // ✅ Correct import
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import DoctorModel from "../models/Doctor";
 import Image from "next/image";
-
-
-const doctorsData = [
-
-  { id: 1, name: "Dr. Richard James", specialty: "General physician", available: true, image: "/doctor_image_1.jpg" },
-  { id: 2, name: "Dr. Emily Larson", specialty: "Gynecologist", available: true, image:  "/doctor_image_2.jpg"  },
-  { id: 3, name: "Dr. Sarah Patel", specialty: "Dermatologist", available: true, image:  "/doctor_image_3.jpg" },
-  { id: 4, name: "Dr. Christopher Lee", specialty: "Pediatricians", available: true, image:  "/doctor_image_4.jpg" },
-  { id: 5, name: "Dr. Anna Wilson", specialty: "Neurologist", available: true, image:"/doctor_image_5.jpg" },
-  { id: 6, name: "Dr. James Brown", specialty: "Gastroenterologist", available: true, image:"/doctor_image_6.jpg" },
-]
 
 const categories = [
   "General physician",
@@ -34,21 +22,16 @@ type Doctor = {
 };
 
 export default function DoctorsPage() {
-
   const [doctors, setDoctors] = useState<Doctor[]>([]);
-  const [user, setUser] = useState<any>(null);
-  console.log(doctors); 
   const [loading, setLoading] = useState(true);
- 
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
-   useEffect(() => {
+  useEffect(() => {
     async function fetchDoctors() {
       try {
         const res = await fetch("/api/doctors");
         const data = await res.json();
         setDoctors(data.data);
-         console.log(data.data);
-  
       } catch (error) {
         console.error("Failed to load doctors:", error);
       } finally {
@@ -57,9 +40,6 @@ export default function DoctorsPage() {
     }
     fetchDoctors();
   }, []);
-
- 
-  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredDoctors =
     selectedCategory === "All"
@@ -105,11 +85,14 @@ export default function DoctorsPage() {
           {filteredDoctors.map((doc) => (
             <Link key={doc._id} href={`/doctorDetails/${doc._id}`}>
               <div className="border rounded-lg shadow-sm p-4 hover:shadow-lg transition cursor-pointer">
-                <Image
-                  src={doc.image}
-                  alt={doc.name}
-                  className="w-full h-52 object-contain rounded-md mb-3 bg-gray-50"
-                />
+                <div className="relative w-full h-52 mb-3 bg-gray-50 rounded-md">
+                  <Image
+                    src={doc.image}
+                    alt={doc.name}
+                    fill
+                    className="object-contain rounded-md"
+                  />
+                </div>
                 <p className="text-green-600 text-sm font-medium mb-1">
                   ● {doc.availability ? "Available" : "Not Available"}
                 </p>

@@ -41,6 +41,8 @@ export const DoctorsList = () => {
                 src=
            {doc.image}
                 alt={doc.name}
+                width={200}
+                height={200}
                 className="h-full object-contain pointer-events-none"
               />
             </div>

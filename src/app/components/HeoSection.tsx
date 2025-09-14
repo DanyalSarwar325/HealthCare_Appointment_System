@@ -2,6 +2,7 @@
 "use client";
 
 import Image from "next/image";
+
 export const HeroSection = () => {
   return (
     <section className="w-[90%] bg-[#5A6CF3] rounded-2xl flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-12 m-auto mt-10">
@@ -22,17 +23,23 @@ export const HeroSection = () => {
             <Image
               src="/avatars/doc1.jpg"
               alt="Doctor 1"
-              className="w-10 h-10 rounded-full border-2 border-white"
+              width={40}
+              height={40}
+              className="rounded-full border-2 border-white object-cover"
             />
             <Image
               src="/avatars/doc2.jpg"
               alt="Doctor 2"
-              className="w-10 h-10 rounded-full border-2 border-white"
+              width={40}
+              height={40}
+              className="rounded-full border-2 border-white object-cover"
             />
             <Image
               src="/avatars/doc3.jpg"
               alt="Doctor 3"
-              className="w-10 h-10 rounded-full border-2 border-white"
+              width={40}
+              height={40}
+              className="rounded-full border-2 border-white object-cover"
             />
           </div>
 
