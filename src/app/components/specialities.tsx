@@ -3,12 +3,12 @@
 
 export const Specialities = () => {
   const specialities = [
-    { name: "General physician", icon: "/Speciality/physician_1.png" },
-    { name: "Gynecologist", icon: "/Speciality/physician_2.png"},
-    { name: "Dermatologist", icon: "/Speciality/physician_3.png" },
-    { name: "Pediatricians", icon: "/Speciality/physician_4.png" },
-    { name: "Neurologist", icon:"/Speciality/surgeon.png"},
-    { name: "Gastroenterologist", icon: "/Speciality/nutritionist.png" },
+    { name: "General physician", icon: "/Speciality/Physician_1.png" },
+    { name: "Gynecologist", icon: "/Speciality/Physician_2.png"},
+    { name: "Dermatologist", icon: "/Speciality/Physician_3.png" },
+    { name: "Pediatricians", icon: "/Speciality/Physician_4.png" },
+    { name: "Neurologist", icon:"/Speciality/Surgeon.png"},
+    { name: "Gastroenterologist", icon: "/Speciality/Nutritionist.png" },
   ];
 
   return (
