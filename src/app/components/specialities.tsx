@@ -7,8 +7,8 @@ export const Specialities = () => {
     { name: "Gynecologist", icon: "/Speciality/Physician_2.png"},
     { name: "Dermatologist", icon: "/Speciality/Physician_3.png" },
     { name: "Pediatricians", icon: "/Speciality/Physician_4.png" },
-    { name: "Neurologist", icon:"/Speciality/Surgeon.png"},
-    { name: "Gastroenterologist", icon: "/Speciality/Nutritionist.png" },
+    { name: "Neurologist", icon:"/Speciality/surgeon.png"},
+    { name: "Gastroenterologist", icon: "/Speciality/nutritionist.png" },
   ];
 
   return (
