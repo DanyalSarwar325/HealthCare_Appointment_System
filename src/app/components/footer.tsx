@@ -9,9 +9,9 @@ export const FooterPage = () => {
         <div>
           <div className="flex items-center gap-2 mb-4">
             <div className="bg-blue-600 p-2 rounded-full">
-              <span className="text-white text-xl font-bold">P</span>
+              <span className="text-white text-xl font-bold">MC</span>
             </div>
-            <h2 className="text-xl font-bold text-blue-700">Prescripto</h2>
+            <h2 className="text-xl font-bold text-blue-700">MediConnect</h2>
           </div>
           <p className="text-sm leading-6">
             MediConnect is a smart healthcare appointment system that seamlessly
@@ -27,7 +27,7 @@ export const FooterPage = () => {
           <h3 className="font-semibold text-gray-900 mb-4">COMPANY</h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="/home" className="hover:text-blue-600">
+              <a href="/" className="hover:text-blue-600">
                 Home
               </a>
             </li>

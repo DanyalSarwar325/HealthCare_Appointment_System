@@ -77,7 +77,7 @@ export const Navbar = () => {
   };
 
   const links = [
-    { name: "HOME", href: "/home" },
+    { name: "HOME", href: "/" },
     { name: "ALL DOCTORS", href: "/doctors" },
     { name: "ABOUT", href: "/about" },
     { name: "CONTACT", href: "/contact" },
