@@ -18,12 +18,10 @@ export default function AboutPage() {
               level overviews. Iterative approaches to corporate strategy.
             </p>
             <div className="mt-6 flex justify-center md:justify-start gap-4">
-              <button className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700">
-                View Details
+              <button className="px-6 py-3 bg-blue-700 text-white font-semibold rounded-lg shadow hover:bg-blue-700">
+                Book An Appointment
               </button>
-              <button className="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg shadow hover:bg-red-600">
-                Make an Appointment
-              </button>
+              
             </div>
           </div>
 
@@ -41,7 +39,7 @@ export default function AboutPage() {
       </section>
 
       {/* Services Section */}
-      <section className="bg-blue-600 py-12">
+      <section className="py-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6 text-white">
           {/* Card 1 */}
           <div className="p-6 bg-blue-700 rounded-xl shadow hover:shadow-xl transition">
@@ -54,7 +52,7 @@ export default function AboutPage() {
           </div>
 
           {/* Card 2 */}
-          <div className="p-6 bg-blue-700 rounded-xl shadow hover:shadow-xl transition">
+          <div className="p-6 bg-blue-700  rounded-xl shadow hover:shadow-xl transition">
             <div className="text-3xl mb-4">💊</div>
             <h3 className="text-xl font-semibold">Medical Store</h3>
             <p className="mt-2 text-sm text-gray-200">

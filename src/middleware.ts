@@ -1,26 +1,19 @@
 import { NextResponse } from "next/server";
-import { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
+import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  const token = await getToken({
-    req: request,
-    secret: process.env.NEXTAUTH_SECRET, // required
-  });
-
   const { pathname } = request.nextUrl;
 
+  // ✅ Get cookie
+  const isLoggedIn = request.cookies.get("isLoggedIn")?.value === "true";
+
   // 🔹 If logged in, prevent access to auth pages
-  if (token && (pathname.startsWith("/login") || pathname.startsWith("/signUp") || pathname.startsWith("/verify"))) {
+  if (isLoggedIn && (pathname.startsWith("/login") || pathname.startsWith("/signUp") || pathname.startsWith("/verify"))) {
     return NextResponse.redirect(new URL("/home", request.url));
   }
 
-    if (token && (pathname.startsWith("/doctor"))) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
   // 🔹 If NOT logged in and trying to access protected routes → redirect to login
-  if (!token && pathname.startsWith("/dashboard")) {
+  if (!isLoggedIn && (pathname.startsWith("/appointment") || pathname.startsWith("/doctor"))) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -32,7 +25,9 @@ export const config = {
   matcher: [
     "/login",
     "/signUp",
-    
-    "/home/:path*", // all dashboard subroutes
+    "/verify",
+    "/home/:path*",
+    "/appointment/:path*",
+    "/doctor/:path*",
   ],
 };

@@ -1,11 +1,10 @@
 "use client";
 import { Mail, Phone } from "lucide-react";
 
-export const FooterPage=()=> {
+export const FooterPage = () => {
   return (
     <footer className="bg-white text-gray-700 border-t mt-10">
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
-        
         {/* Logo & Description */}
         <div>
           <div className="flex items-center gap-2 mb-4">
@@ -15,10 +14,11 @@ export const FooterPage=()=> {
             <h2 className="text-xl font-bold text-blue-700">Prescripto</h2>
           </div>
           <p className="text-sm leading-6">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+            MediConnect is a smart healthcare appointment system that seamlessly
+            connects patients with trusted doctors. It simplifies booking,
+            scheduling, and managing appointments with just a few clicks.
+            Patients can browse specialties, check doctor availability, and
+            reserve slots in real time. 
           </p>
         </div>
 
@@ -26,10 +26,26 @@ export const FooterPage=()=> {
         <div>
           <h3 className="font-semibold text-gray-900 mb-4">COMPANY</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/home" className="hover:text-blue-600">Home</a></li>
-            <li><a href="/about" className="hover:text-blue-600">About us</a></li>
-            <li><a href="/contact" className="hover:text-blue-600">Contact Us</a></li>
-            <li><a href="/doctors" className="hover:text-blue-600">Doctors</a></li>
+            <li>
+              <a href="/home" className="hover:text-blue-600">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="/about" className="hover:text-blue-600">
+                About us
+              </a>
+            </li>
+            <li>
+              <a href="/contact" className="hover:text-blue-600">
+                Contact Us
+              </a>
+            </li>
+            <li>
+              <a href="/doctors" className="hover:text-blue-600">
+                Doctors
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -43,8 +59,11 @@ export const FooterPage=()=> {
             </li>
             <li className="flex items-center gap-2">
               <Mail className="w-4 h-4 text-blue-600" />
-              <a href="mailto:greatstackdev@gmail.com" className="hover:text-blue-600">
-                greatstackdev@gmail.com
+              <a
+                href="mailto:greatstackdev@gmail.com"
+                className="hover:text-blue-600"
+              >
+                danyal@gmail.com
               </a>
             </li>
           </ul>
@@ -53,8 +72,8 @@ export const FooterPage=()=> {
 
       {/* Bottom Bar */}
       <div className="border-t py-4 text-center text-sm text-gray-500">
-        Copyright 2024 © Greatstack.dev - All Rights Reserved.
+        Copyright 2024 © Danyal Sarwar - All Rights Reserved.
       </div>
     </footer>
   );
-}
+};

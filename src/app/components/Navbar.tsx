@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { Menu, X, User } from "lucide-react";
 import { Nunito } from "next/font/google";
 
-
 const nunito = Nunito({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
@@ -24,10 +23,10 @@ export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState<User|null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Fetch user once on mount
+  // ✅ Fetch user only once on mount
   useEffect(() => {
     fetch("/api/me")
       .then((res) => res.json())
@@ -35,7 +34,7 @@ export const Navbar = () => {
         if (data.loggedIn) {
           setIsLoggedIn(true);
           setUser(data.user);
-          localStorage.setItem("user", JSON.stringify(data.user)); // keep latest user
+          localStorage.setItem("user", JSON.stringify(data.user));
         } else {
           setIsLoggedIn(false);
           setUser(null);
@@ -44,9 +43,9 @@ export const Navbar = () => {
       })
       .catch((err) => console.error("Failed to fetch user:", err))
       .finally(() => setLoading(false));
-  }, [isLoggedIn]);
+  }, []); // 👈 removed isLoggedIn from deps
 
-  // ✅ Listen for login events from anywhere
+  // ✅ Listen for login/logout updates
   useEffect(() => {
     const handleUserUpdate = () => {
       const storedUser = localStorage.getItem("user");
@@ -69,7 +68,7 @@ export const Navbar = () => {
       setIsLoggedIn(false);
       setUser(null);
       localStorage.removeItem("user");
-      window.dispatchEvent(new Event("userUpdated")); // notify all components
+      window.dispatchEvent(new Event("userUpdated"));
       setDropdownOpen(false);
       window.location.href = "/signIn";
     } catch (err) {
@@ -91,9 +90,9 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <Image src="/next.svg" alt="Prescripto Logo" width={32} height={32} />
+          <Image src="/logo.jpg" alt="Prescripto Logo" width={32} height={32} />
           <span className="text-2xl font-semibold text-[#1A237E]">
-            Prescripto
+            MediConnect
           </span>
         </div>
 
@@ -145,7 +144,8 @@ export const Navbar = () => {
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-40 w-48 bg-white shadow-lg rounded-lg border py-2">
+                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border py-2">
+                  {/* 👆 mt-40 → mt-2 so it shows below button */}
                   <Link
                     href="/profile"
                     onClick={() => setDropdownOpen(false)}
@@ -175,11 +175,68 @@ export const Navbar = () => {
         {/* Mobile Hamburger */}
         <button
           className="md:hidden text-black"
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => setMenuOpen((prev) => !prev)}
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
+
+      {/* Mobile Menu Panel */}
+      {menuOpen && (
+        <div className="md:hidden bg-white border-t shadow-lg">
+          <div className="flex flex-col space-y-4 px-6 py-4">
+            {links.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`text-lg font-medium ${
+                  pathname === link.href ? "text-[#1A237E]" : "text-gray-800"
+                }`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+
+            {/* Login/logout for mobile */}
+            {loading ? null : !isLoggedIn ? (
+              <Link
+                href="/signUp"
+                className="px-6 py-2 bg-blue-600 text-white rounded-full text-center text-sm font-medium hover:bg-blue-700"
+                onClick={() => setMenuOpen(false)}
+              >
+                Create account
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/profile"
+                  onClick={() => setMenuOpen(false)}
+                  className="block text-sm text-gray-700"
+                >
+                  My Profile
+                </Link>
+                <Link
+                  href="/appointment"
+                  onClick={() => setMenuOpen(false)}
+                  className="block text-sm text-gray-700"
+                >
+                  My Appointments
+                </Link>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setMenuOpen(false);
+                  }}
+                  className="block text-left w-full text-sm text-red-600"
+                >
+                  Logout
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

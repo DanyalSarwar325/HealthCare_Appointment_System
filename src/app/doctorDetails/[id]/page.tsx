@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+import toast from "react-hot-toast";
 
 type Doctor = {
   _id: string;
@@ -19,6 +21,17 @@ export default function DoctorDetails() {
   const [doctor, setDoctor] = useState<Doctor | null>(null);
   const [loading, setLoading] = useState(true);
 
+   const handleClick = (e: React.MouseEvent) => {
+    const isLoggedIn = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("isLoggedIn="))
+      ?.split("=")[1] === "true";
+
+    if (!isLoggedIn) {
+      e.preventDefault(); // stop navigation
+      toast.error("Please login to book appointment");
+    }
+  };
   // Days & slots
   const days = [
     { id: 1, label: "THU", date: "11" },
@@ -67,6 +80,8 @@ export default function DoctorDetails() {
         <Image
           src={doctor.image}
           alt={doctor.name}
+          width={400}
+          height={400}
           className="rounded-2xl object-cover w-full h-[300px] md:h-[400px]"
         />
       </div>
@@ -129,11 +144,13 @@ export default function DoctorDetails() {
         </div>
 
         {/* Book Appointment */}
-        <button
-          className="mt-6 w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition"
-        >
-          Book an appointment
-        </button>
+       <Link href="/appointment">
+  <button
+    className="mt-6 w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition"
+   onClick={handleClick}>
+    Book an appointment
+  </button>
+</Link>
       </div>
     </div>
   );

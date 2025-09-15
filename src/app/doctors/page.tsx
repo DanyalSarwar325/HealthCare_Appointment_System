@@ -21,6 +21,16 @@ type Doctor = {
   image: string;
 };
 
+// Skeleton shimmer card
+const DoctorCardSkeleton = () => (
+  <div className=" rounded-lg shadow-sm p-4 animate-pulse">
+    <div className="relative w-full h-52 mb-3 bg-gray-300 rounded-md"></div>
+    <div className="h-4 bg-gray-300 rounded w-1/3 mb-2"></div>
+    <div className="h-5 bg-gray-300 rounded w-2/3 mb-2"></div>
+    <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+  </div>
+);
+
 export default function DoctorsPage() {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState(true);
@@ -82,25 +92,30 @@ export default function DoctorsPage() {
 
         {/* Doctors Grid */}
         <div className="md:col-span-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredDoctors.map((doc) => (
-            <Link key={doc._id} href={`/doctorDetails/${doc._id}`}>
-              <div className="border rounded-lg shadow-sm p-4 hover:shadow-lg transition cursor-pointer">
-                <div className="relative w-full h-52 mb-3 bg-gray-50 rounded-md">
-                  <Image
-                    src={doc.image}
-                    alt={doc.name}
-                    fill
-                    className="object-contain rounded-md"
-                  />
-                </div>
-                <p className="text-green-600 text-sm font-medium mb-1">
-                  ● {doc.availability ? "Available" : "Not Available"}
-                </p>
-                <h3 className="font-bold text-lg">{doc.name}</h3>
-                <p className="text-gray-600">{doc.Specialization}</p>
-              </div>
-            </Link>
-          ))}
+          {loading
+            ? // Show shimmer while loading
+              Array.from({ length: 6 }).map((_, idx) => (
+                <DoctorCardSkeleton key={idx} />
+              ))
+            : filteredDoctors.map((doc) => (
+                <Link key={doc._id} href={`/doctorDetails/${doc._id}`}>
+                  <div className=" rounded-lg shadow-lg p-4 hover:shadow-lg transition cursor-pointer">
+                    <div className="relative w-full h-52 mb-3 bg-gray-50 rounded-md">
+                      <Image
+                        src={doc.image}
+                        alt={doc.name}
+                        fill
+                        className="object-contain rounded-md"
+                      />
+                    </div>
+                    <p className="text-green-600 text-sm font-medium mb-1">
+                      ● {doc.availability ? "Available" : "Not Available"}
+                    </p>
+                    <h3 className="font-bold text-lg">{doc.name}</h3>
+                    <p className="text-gray-600">{doc.Specialization}</p>
+                  </div>
+                </Link>
+              ))}
         </div>
       </div>
     </div>

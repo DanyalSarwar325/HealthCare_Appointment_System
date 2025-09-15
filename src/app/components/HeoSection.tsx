@@ -2,15 +2,19 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export const HeroSection = () => {
   return (
     <section className="w-[90%] bg-[#5A6CF3] rounded-2xl flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-12 m-auto mt-10">
       {/* Left Content */}
       <div className="text-center md:text-left max-w-lg space-y-6">
-        <h1 className="text-3xl md:text-5xl font-bold text-white leading-snug">
+        <Link
+          href="/doctors"
+          className="text-3xl md:text-5xl font-bold text-white leading-snug block "
+        >
           Book Appointment <br /> With Trusted Doctors
-        </h1>
+        </Link>
         <p className="text-white/90 text-sm md:text-base">
           Simply browse through our extensive list of trusted doctors, <br />
           schedule your appointment hassle-free.
@@ -28,7 +32,7 @@ export const HeroSection = () => {
               className="rounded-full border-2 border-white object-cover"
             />
             <Image
-              src="/avatars/doc2.jpg"
+              src="/group_profiles.png"
               alt="Doctor 2"
               width={40}
               height={40}
@@ -43,9 +47,12 @@ export const HeroSection = () => {
             />
           </div>
 
-          <button className="bg-white text-[#5A6CF3] px-6 py-3 rounded-full font-medium shadow hover:scale-105 transition">
-            Book appointment →
-          </button>
+          {/* ✅ Fixed button link */}
+          <Link href="/doctors">
+            <button className="bg-white text-[#5A6CF3] px-6 py-3 rounded-full font-medium shadow hover:scale-105 transition cursor-pointer">
+              Book appointment →
+            </button>
+          </Link>
         </div>
       </div>
 
@@ -53,7 +60,7 @@ export const HeroSection = () => {
       <div className="mt-10 md:mt-0 md:ml-10 flex-1 flex items-center justify-center">
         {/* Replace with your doctor image */}
         <div className="w-64 h-64 md:w-80 md:h-80 bg-white rounded-xl shadow-inner flex items-center justify-center text-gray-400">
-          Add Your Image
+          <img src="/frontend/about_image.png" alt="" />
         </div>
       </div>
     </section>

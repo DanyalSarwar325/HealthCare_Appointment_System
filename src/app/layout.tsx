@@ -10,8 +10,8 @@ import AuthProvider from "@/context/AuthProvider";
 import { Navbar } from "./components/Navbar";
 
 export const metadata: Metadata = {
-  title: "Prescripto",
-  description: "Healthcare platform",
+  title: "MediConnect",
+  description: "Your health is our first priority",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
